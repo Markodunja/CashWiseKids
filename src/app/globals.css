@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* MoneySprout palette */
+  --color-primary: #4caf50;
+  --color-primary-accent: #66bb6a;
+  --color-accent: #8bc34a;
+  --color-deep-green: #388e3c;
+  --color-gold: #ffca28;
+  --color-gold-dark: #ffb300;
+  --color-orange: #ff9800;
+  --color-bg-warm: #fff8e1;
+  --color-bg-warm-alt: #faf9f6;
+  --color-sky-blue: #81d4fa;
+  --color-navy: #1a237e;
+  --color-text-dark: #2e3a3f;
+  --color-error: #ef5350;
+
+  --radius-card: 16px;
+  --radius-card-lg: 24px;
+  --radius-button: 16px;
+  --tap-target: 48px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-dark);
+}
+
+/* Minimum tap target for accessibility */
+button,
+a[role="button"],
+[data-tap-target] {
+  min-height: var(--tap-target);
+  min-width: var(--tap-target);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,6 @@
+[
+  { "id": "piggy-tree", "name": "Piggy Bank Tree", "price": 24.99, "description": "A fun piggy bank that looks like a tree." },
+  { "id": "budget-jars", "name": "Budget Jars Set", "price": 19.99, "description": "5 colorful jars for Spend, Save, Invest, Give, Fun." },
+  { "id": "goal-board", "name": "Goal Board", "price": 14.99, "description": "Pin up savings goals and track progress." },
+  { "id": "money-book", "name": "Money Sprout Book", "price": 9.99, "description": "A storybook to read together about money habits." }
+]

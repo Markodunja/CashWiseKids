@@ -1,0 +1,51 @@
+[
+  {
+    "id": "first-save",
+    "title": "Your First Save",
+    "pillar": "save",
+    "storyIntro": "Sprout the squirrel found a shiny acorn. Should they eat it now or save it for winter?",
+    "points": 10,
+    "ageRange": [5, 14],
+    "steps": [
+      {
+        "id": "intro",
+        "type": "dialog",
+        "content": "You found 5 Sprout Points! What do you want to do?"
+      },
+      {
+        "id": "choice",
+        "type": "choice",
+        "content": "Choose one:",
+        "choices": [
+          { "label": "Put 3 in Save jar, 2 in Fun jar", "outcome": "Great balance! You're learning to save and have fun.", "points": 10 },
+          { "label": "Put all in Fun jar", "outcome": "Fun is important! Next time try putting a little in Save too.", "points": 5 },
+          { "label": "Put all in Save jar", "outcome": "Super saver! Don't forget to enjoy a little fun sometimes.", "points": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "earn-quest",
+    "title": "Earning Your Points",
+    "pillar": "earn",
+    "storyIntro": "Help at home and earn Sprout Points. Small tasks add up!",
+    "points": 15,
+    "ageRange": [5, 14],
+    "steps": [
+      {
+        "id": "intro",
+        "type": "dialog",
+        "content": "You helped set the table. You earned 5 points! Where do they go?"
+      },
+      {
+        "id": "choice",
+        "type": "choice",
+        "content": "Pick a jar:",
+        "choices": [
+          { "label": "Save jar", "outcome": "Nice! Saving helps you reach big goals.", "points": 15 },
+          { "label": "Give jar", "outcome": "Kind choice! Giving helps others.", "points": 15 }
+        ]
+      }
+    ]
+  }
+]
