@@ -1,36 +1,49 @@
-import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 /**
- * Protect kid and parent app routes. Redirect unauthenticated to login.
- * Role-based redirect: after login, parent -> /parent, kid -> /
+ * Lightweight auth check: protect routes by session cookie only (no JWT decode in Edge).
+ * Avoids MIDDLEWARE_INVOCATION_FAILED from next-auth withAuth on Vercel Edge.
  */
-export default withAuth(
-  function middleware(req) {
-    const token = req.nextauth?.token as
-      | { role?: "parent" | "kid"; email?: string }
-      | null
-      | undefined;
-    const path = req.nextUrl.pathname;
+const PROTECTED_PATHS = [
+  "/quests",
+  "/goals",
+  "/savings",
+  "/achievements",
+  "/shop-virtual",
+  "/profile",
+  "/parent",
+  "/store",
+];
 
-    if (path === "/" && token?.role === "parent") {
-      return Response.redirect(new URL("/parent", req.url));
-    }
-    if (path.startsWith("/parent") && token?.role === "kid") {
-      return Response.redirect(new URL("/", req.url));
-    }
-    return;
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token,
-    },
+function isProtected(pathname: string): boolean {
+  return PROTECTED_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + "/")
+  );
+}
+
+export function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  if (!isProtected(pathname)) {
+    return NextResponse.next();
   }
-);
+
+  const sessionToken = req.cookies.get("next-auth.session-token")?.value;
+  if (!sessionToken) {
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
     "/quests/:path*",
     "/goals",
+    "/goals/:path*",
     "/savings",
     "/achievements",
     "/shop-virtual",
